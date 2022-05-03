@@ -11,6 +11,10 @@ const MovieListSchema = mongoose.Schema({
         type:String,
         required:[true, "please provie list name"]
     },
+    private:{
+        type: Boolean,
+        default:false
+    },
     movies:[{
         type:mongoose.Schema.ObjectId,
         ref: 'Movie'

@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const compression = require('compression')
+const cors = require('cors')
 
 const AuthRouter = require('./routes/AuthRouter');
 const MovieListRouter = require('./routes/MovieListRouter');
@@ -13,6 +14,14 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.static(`${__dirname}/public`))
 app.use(compression())
+
+
+//allow cors
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE']
+}))
+app.options('*', cors())
 
 app.use((req, res, next)=>{
     req.requestTime = new Date().toISOString();
