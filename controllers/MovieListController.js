@@ -51,7 +51,7 @@ exports.createMovieList = catchAsync(async (req, res, next) => {
 
 exports.getMovieLists = catchAsync(async (req, res, next) => {
 
-    const movieLists = await MovieList.find({ user: req.user });
+    const movieLists = req.user ? await MovieList.find({ user: req.user }) : await MovieList.find({ private: false });
 
     if (Array.isArray(movieLists)) {
 
